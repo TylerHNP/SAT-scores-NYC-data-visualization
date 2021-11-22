@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSE 332 Project 4</title>
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,300;1,400;1,500&display=swap"
+        rel="stylesheet">
+    <script src="https://d3js.org/d3.v3.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+</head>
+
+<body>
+    <div id='title-container' class='svg-container'>
+        <h3>CSE 332 Project 4</h3>
+        <p>SAT scores of Highshool in New York</p>
+        <select id="pie-attr" onchange="runAttr()">
+            <option value="avgScoreTotal">Average total SAT score</option>
+            <option value="avgScoreMath">Average score of SAT Math</option>
+            <option value="avgScoreReading">Average score of SAT reading</option>
+            <option value="avgScoreWriting">Average score of SAT writing</option>
+            <option value="studentEnrollment">Student Enrollment</option>
+            <option value="percentWhite">Percentage of white students</option>
+            <option value="percentBlack">Percentage of black students</option>
+            <option value="percentHispanic">Percentage of hispanic students</option>
+            <option value="percentAsian">Percentage of asian students</option>
+            <option value="percentTested">Percentage of tested students</option>
+        </select>
+    </div>
+
+    <div id='map-div' class='svg-container'>
+        <div id='map'>
+        </div>
+
+    </div>
+    <div id='pie-outer'>
+
+        <div id='pie-div' class='svg-container'>
+        </div>
+    </div>
+
+
+    <!-- <div id='parallel-coordinate-div' class='svg-container'>
+    </div> -->
+    <div id='histogram-div' class='svg-container'>
+
+        <script src="./script.js" type='module'></script>
+
+</body>
+
+</html>
