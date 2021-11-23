@@ -4,7 +4,7 @@ var vw = window.innerWidth;
 var vh = window.innerHeight;
 
 export function renderBarChart(dataIn, dataBorough, selection, ranges, lowerLimit = null, upperLimit = null, index = null) {
-    d3.select('#histogram-div').selectAll("*").remove();
+    d3.select('#horizontal-bar-chart-div').selectAll("*").remove();
     var toRet = {};
     var counts = calculateBarData(dataIn, dataBorough, selection, ranges, lowerLimit, upperLimit, index);
 
@@ -43,7 +43,7 @@ export function renderBarChart(dataIn, dataBorough, selection, ranges, lowerLimi
 
     var data_ready = Object.entries(counts);
 
-    var svg = d3.select('#histogram-div').append("svg")
+    var svg = d3.select('#horizontal-bar-chart-div').append("svg")
         .attr("width", width + margin.r + margin.l)
         .attr("height", height + margin.t + margin.b)
         .append("g")

@@ -12,12 +12,33 @@ body {
   color: white;
 }
 
+#pie-div {
+  position: absolute;
+  top: 0vh;
+  left: 45vw;
+  width: 30%;
+  height: 70%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
 #map-div {
   position: absolute;
   top: 5vh;
   left: 0vw;
   width: 45%;
   height: 90%;
+}
+
+#horizontal-bar-chart-div {
+  /* background-color: #aaa; */
+  position: absolute;
+  bottom: 40vh;
+  right: 0vw;
+  width: 20%;
+  height: 50%;
+  display: inline;
 }
 
 .extent {
@@ -30,17 +51,6 @@ body {
 
 rect {
   background-color: white;
-}
-
-#pie-div {
-  position: absolute;
-  top: 0vh;
-  right: 0vw;
-  width: 55%;
-  height: 70%;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
 }
 
 #pie-attr {
@@ -61,15 +71,6 @@ rect {
   right: 0vw;
   width: 55%;
   height: 30%;
-}
-
-#histogram-div {
-  position: absolute;
-  bottom: 0vh;
-  left: 0vw;
-  width: 45%;
-  height: 30%;
-  display: inline;
 }
 
 #title-container {

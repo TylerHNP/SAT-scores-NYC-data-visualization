@@ -1,6 +1,7 @@
 import { mainData, groupbyBorough, mainMapData } from './defined.js';
 import { renderPie } from './pieChart.js';
-import { renderBarChart } from './barChart.js';
+import { calculateRanges } from './quantile.js';
+import { renderHorizontalBarChart } from './horizontalbarChart.js';
 import { renderParallelCoordinates } from './parallel-coordinate.js';
 import { renderMap } from './map.js'
 
@@ -64,14 +65,14 @@ window.onload = function () {
         schools: [],
         ranges: [],
         attribute: 'avgScoreTotal',
+        selectedRanges: [true, true, true]
     }
     loadData().then(
         function () {
-
-            pieChart = renderPie(mainData.avgScoreTotal, 'avgScoreTotal', 'all');
-            selectionState.ranges = pieChart.ranges;
+            selectionState.ranges = calculateRanges(mainData[selectionState.attribute]);
+            renderPie(selectionState);
             renderMap(selectionState);
-            barChart = renderBarChart(mainData.avgScoreTotal, mainData.borough, 'all', pieChart.ranges);
+            renderHorizontalBarChart(selectionState);
             // renderParallelCoordinates(mainData, 'all', pieChart.ranges);
         }
     )
@@ -85,19 +86,8 @@ window.runAttr = function () {
     selectionState.ranges = pieChart.ranges;
     selectionState.attribute = key;
     renderMap(selectionState);
-    var barChart = renderBarChart(mainData[key], mainData.borough, 'all', pieChart.ranges);
+    // var barChart = renderBarChart(mainData[key], mainData.borough, 'all', pieChart.ranges);
     // barChart.update(mainData[key], mainData.borough, 'all', pieChart.ranges);
 }
 
-// var mapboxAccessToken = 'pk.eyJ1IjoidHlsZXJobnAiLCJhIjoiY2t2dnU5bzhiMDV5dzJwbm9qZ2NhZHY1cCJ9.aHdj1f8dPW52SnUHTRTrsg';
-// var map = L.map('map').setView([40.70, -73.94], 10);
-
-// L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=' + mapboxAccessToken, {
-//     id: 'mapbox/dark-v9',
-//     tileSize: 512,
-//     zoomOffset: -1
-// }).addTo(map);
-
-
-// L.geoJson(boroughs).addTo(map);
 

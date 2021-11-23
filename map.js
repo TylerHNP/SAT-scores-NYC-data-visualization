@@ -5,7 +5,6 @@ var vh = window.innerHeight;
 
 export function renderMap(selection) {
     d3.select('#map-div').selectAll("*").remove();
-    console.log(selection);
     var width = 0.45 * vw;
     var height = 0.9 * vh;
     var ranges = selection.ranges;
