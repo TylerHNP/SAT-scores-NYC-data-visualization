@@ -8,9 +8,9 @@ export function renderBarChart(dataIn, dataBorough, selection, ranges, lowerLimi
     var toRet = {};
     var counts = calculateBarData(dataIn, dataBorough, selection, ranges, lowerLimit, upperLimit, index);
 
-    var margin = { r: 0.05 * vw, l: 0.005 * vw, t: 0.015 * vw, b: 0.03 * vw };
+    var margin = { r: 0.05 * vw, l: 0.005 * vw, t: 0.014 * vw, b: 0.03 * vw };
     var width = 0.45 * vw - margin.r - margin.l;
-    var height = 0.4 * vh - margin.t - margin.b;
+    var height = 0.3 * vh - margin.t - margin.b;
 
     var x = d3.scale.ordinal().rangeRoundBands([0, width], 0.3)
         .domain(Object.keys(counts));
@@ -29,6 +29,16 @@ export function renderBarChart(dataIn, dataBorough, selection, ranges, lowerLimi
     var color = d3.scale.ordinal()
         .domain(subgroups)
         .range(colors[selection])
+
+    var brush = d3.svg.brush()
+        .x(d3.scale.linear().range([0, width]))
+        .on('brushend', function brushend() {
+            var extent = brush.extent();
+            svg.select('.brush').call(brush.clear());
+            brushed(extent);
+        });
+
+
 
 
     var data_ready = Object.entries(counts);

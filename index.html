@@ -22,7 +22,9 @@
 </head>
 
 <body>
-    <div id='title-container' class='svg-container'>
+    <div id='map-div'>
+    </div>
+    <div id='title-container'>
         <h3>CSE 332 Project 4</h3>
         <p>SAT scores of Highshool in New York</p>
         <select id="pie-attr" onchange="runAttr()">
@@ -38,24 +40,14 @@
             <option value="percentTested">Percentage of tested students</option>
         </select>
     </div>
-
-    <div id='map-div' class='svg-container'>
-        <div id='map'>
-        </div>
-
+    <div id='pie-div'>
     </div>
-    <div id='pie-outer'>
-
-        <div id='pie-div' class='svg-container'>
-        </div>
+    <div id='histogram-div'>
+    </div>
+    <div id='parallel-coordinate-div'>
     </div>
 
-
-    <!-- <div id='parallel-coordinate-div' class='svg-container'>
-    </div> -->
-    <div id='histogram-div' class='svg-container'>
-
-        <script src="./script.js" type='module'></script>
+    <script src="./script.js" type='module'></script>
 
 </body>
 

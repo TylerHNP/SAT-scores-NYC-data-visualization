@@ -1,8 +1,6 @@
 * {
   padding: 0;
   margin: 0;
-  background-color: #161613;
-  color: white;
 }
 
 html,
@@ -10,35 +8,36 @@ body {
   height: 100%;
   font-family: "Montserrat", sans-serif;
   font-size: 0.9vw;
-}
-.svg-container {
-  float: left;
+  background-color: #161613;
+  color: white;
 }
 
 #map-div {
-  /* background: #ddd; */
-  width: 40%;
-  height: 60%;
-}
-
-.leaflet-zoom-animated {
-  background-color: transparent;
-}
-
-#map {
-  /* background: #ddd; */
-  width: 90%;
-  height: 95%;
-  margin: 5%;
-}
-
-#pie-outer {
-  position: relative;
-}
-#pie-div {
-  /* background: #aaa; */
+  position: absolute;
+  top: 5vh;
+  left: 0vw;
   width: 45%;
-  height: 45%;
+  height: 90%;
+}
+
+.extent {
+  stroke: #fff;
+  fill: steelblue;
+  fill-opacity: 0.25;
+  shape-rendering: crispEdges;
+  background-color: white;
+}
+
+rect {
+  background-color: white;
+}
+
+#pie-div {
+  position: absolute;
+  top: 0vh;
+  right: 0vw;
+  width: 55%;
+  height: 70%;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -46,34 +45,37 @@ body {
 
 #pie-attr {
   position: absolute;
-  left: 75vw;
+  background-color: #161613;
+  right: 2em;
   top: 0;
   margin-top: 2vw;
-  margin-left: 5em;
   padding: 0.5em;
   font-size: 1em;
   font-family: "Montserrat", sans-serif;
   border-color: #aaa;
+  color: white;
 }
-/* #parallel-coordinate-div {
-   background: #777;
-  width: 50%;
-  height: 45%;
-}  */
+#parallel-coordinate-div {
+  position: absolute;
+  bottom: 0vh;
+  right: 0vw;
+  width: 55%;
+  height: 30%;
+}
 
-#histogarm-div {
-  /* background: rgb(61, 61, 61); */
+#histogram-div {
+  position: absolute;
+  bottom: 0vh;
+  left: 0vw;
   width: 45%;
-  height: 20%;
+  height: 30%;
+  display: inline;
 }
 
 #title-container {
   height: 10%;
-  margin-left: auto;
-  margin-right: auto;
   width: 100%;
   text-align: center;
-  align-items: center;
 }
 
 h3 {
@@ -88,4 +90,8 @@ td {
 }
 p {
   color: #aaa;
+}
+
+svg {
+  cursor: default;
 }

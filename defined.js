@@ -15,6 +15,11 @@ export var mainData = {
     avgScoreTotal: []
 };
 
+export var mainMapData = {
+    borough: [],
+    schools: [],
+}
+
 
 
 var dataBrooklyn = {
@@ -129,9 +134,20 @@ export var labels = new Map([
 
 export var colors = {
     'all': [
-        '#004274',
-        '#39A0ED',
-        '#ACD7F7'],
+        // "#e3f2fd",
+        // "#bbdefb", 
+        // "#90caf9",
+        "#64b5f6",
+        //  "#42a5f5", 
+        // "#2196f3",
+        "#1e88e5",
+        // "#1976d2",
+        // "#1565c0", 
+        "#0d47a1"],
+    // 'all': [
+    //     '#004274',
+    //     '#39A0ED',
+    //     '#ACD7F7'],
     'Brooklyn': [
         '#00725C',
         '#36F1CD',
@@ -144,7 +160,7 @@ export var colors = {
     'Manhattan': [
         '#9A251D',
         '#FF4D4D',
-        '#FFAAA5'],
+        '#FF7D75'],
     'Queens': [
         '#8E430D',
         '#E4572E',
