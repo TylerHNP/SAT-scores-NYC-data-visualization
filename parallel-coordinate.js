@@ -10,6 +10,8 @@ export function renderParallelCoordinates(selection) {
     var width = 0.6 * vw - margin.r - margin.l;
     var height = 0.6 * vh - margin.t - margin.b;
     var selectedBoroughs = selection.boroughs;
+    var selectedSchools = selection.schools;
+    var isSchoolsEmpty = selectedSchools.length === 0;
     var ranges = selection.selectedRanges.map((index) => (selection.ranges[index]));
     var labels = ['avgScoreWriting', 'avgScoreReading', 'avgScoreMath', 'avgScoreTotal', 'studentEnrollment'];
     var y = {}
@@ -38,9 +40,8 @@ export function renderParallelCoordinates(selection) {
         .attr("d", path)
         .style("fill", "transparent")
         .style("stroke", function (d) {
-            if (selectedBoroughs.includes(d.borough)) {
+            if (selectedBoroughs.includes(d.borough) && (isSchoolsEmpty || selectedSchools.includes(d.id))) {
                 var dp = d[selection.attribute];
-
                 for (var i = 0; i < ranges.length; i++) {
                     if (dp >= ranges[i][0] && dp < ranges[i][1]) {
                         return colors['all'][i];

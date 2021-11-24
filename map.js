@@ -1,4 +1,5 @@
 import { colors, mainData, mainMapData } from './defined.js';
+import { update } from './script.js';
 
 var vw = window.innerWidth;
 var vh = window.innerHeight;
@@ -14,7 +15,8 @@ export function renderMap(selection) {
     var attributeValues = mainData[selection.attribute];
     var selectedBoroughs = selection.boroughs;
     var ids = mainData.id;
-    var points = latitude.map((e, i) => [longtitude[i], e, boroughs[i], attributeValues[i], ids[i]]);
+    var schoolNames = mainData.schoolName;
+    var points = latitude.map((e, i) => [longtitude[i], e, boroughs[i], attributeValues[i], ids[i], schoolNames[i]]);
     var projection = d3.geo.mercator()
         .scale(height * 90)
         .center([-73.975242, 40.700610])
@@ -29,6 +31,8 @@ export function renderMap(selection) {
 
     var g = svg.append('g');
 
+
+
     var mapLayer = g.append('g')
         .classed('map-layer', true);
 
@@ -37,7 +41,7 @@ export function renderMap(selection) {
         .y(d3.scale.identity().domain([0, height]))
         .on('brushend', function brushend() {
             var extent = brush.extent();
-            svg.select('.brush').call(brush.clear());
+            svg.select('brush').call(brush.clear());
             brushed(extent);
         });
 
@@ -78,29 +82,31 @@ export function renderMap(selection) {
             }
         )
         .style('opacity', function (d) {
-            if (selectedBoroughs.includes(d[2])) {
+            if (selectedBoroughs.includes(d[2]) && selection.schools.length === 0) {
                 return 1;
             }
+            if (selection.schools.includes(d[4])) return 1;
             return 0.05;
-        });
+        })
+        ;
 
     svg.call(brush);
 
     function brushed(extent) {
-        console.log('brushed called');
+        var selectedSchools = [];
+        // console.log('brushed called');
         var x0 = extent[0][0],
             x1 = extent[1][0],
             y0 = extent[0][1],
             y1 = extent[1][1];
-        console.log(x0, x1, y0, y1);
+        // console.log(x0, x1, y0, y1);
 
         svg.selectAll('circle').style('opacity',
             function (d) {
                 var cx = projection(d)[0];
                 var cy = projection(d)[1];
-                console.log(x0 <= cx);
-                console.log(cx);
                 if (x0 <= cx && cx <= x1 && y0 <= cy && cy <= y1) {
+                    selectedSchools.push(d[4]);
                     return 1;
                 }
                 else {
@@ -108,7 +114,20 @@ export function renderMap(selection) {
                 }
 
             });
+        if (selectedSchools.length < mainData['id'].length) {
+            selection.schools = selectedSchools;
+            update(selection);
+        }
+        else {
+            console.log('reset to all');
+            selection.schools = [];
+            update(selection);
+        }
+
     }
+
+
+
 
 
 

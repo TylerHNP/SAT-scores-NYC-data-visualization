@@ -1,6 +1,7 @@
 export var mainData = {
     borough: [],
     id: [],
+    schoolName: [],
     latitude: [],
     longtitude: [],
     studentEnrollment: [],
@@ -28,6 +29,7 @@ export var combinedData = {
 var dataBrooklyn = {
     borough: [],
     id: [],
+    schoolName: [],
     latitude: [],
     longtitude: [],
     studentEnrollment: [],
@@ -45,6 +47,7 @@ var dataBrooklyn = {
 var dataBronx = {
     borough: [],
     id: [],
+    schoolName: [],
     latitude: [],
     longtitude: [],
     studentEnrollment: [],
@@ -62,6 +65,7 @@ var dataBronx = {
 var dataManhattan = {
     borough: [],
     id: [],
+    schoolName: [],
     latitude: [],
     longtitude: [],
     studentEnrollment: [],
@@ -79,6 +83,7 @@ var dataManhattan = {
 var dataQueens = {
     borough: [],
     id: [],
+    schoolName: [],
     latitude: [],
     longtitude: [],
     studentEnrollment: [],
@@ -96,6 +101,7 @@ var dataQueens = {
 var dataStatenIsland = {
     borough: [],
     id: [],
+    schoolName: [],
     latitude: [],
     longtitude: [],
     studentEnrollment: [],

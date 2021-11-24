@@ -25,9 +25,21 @@ export function renderHorizontalBarChart(selection) {
     }
 
     var selectedBoroughs = selection.boroughs;
+    var selectedSchools = selection.schools;
 
     for (var key of Object.keys(counts)) {
-        var count = (groupbyBorough[key][attribute]).filter(
+        var data = groupbyBorough[key][attribute];
+        if (selectedSchools.length !== 0) {
+            var ids = groupbyBorough[key]['id'];
+            var newData = [];
+            for (let i = 0; i < ids.length; i++) {
+                if (selectedSchools.includes(ids[i])) {
+                    newData.push(data[i]);
+                }
+            }
+            data = newData;
+        }
+        var count = (data).filter(
             function (dp) {
                 for (var range of ranges) {
                     if (dp >= range[0] && dp < range[1]) {
@@ -118,7 +130,6 @@ export function renderHorizontalBarChart(selection) {
         else {
             selection.boroughs.push(d[0]);
         }
-        console.log(selection);
         update(selection);
     }
 };

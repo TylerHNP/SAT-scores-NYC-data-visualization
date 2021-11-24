@@ -17,6 +17,7 @@ function loadData() {
                 var borough = d.Borough;
                 var toAdd = {
                     id: id,
+                    schoolName: d.SchoolName,
                     avgScoreWriting: +d.Writing,
                     avgScoreReading: +d.Reading,
                     avgScoreMath: +d.Math,
@@ -32,6 +33,7 @@ function loadData() {
                 combinedData.main.push(toAdd);
                 mainData.borough.push(borough);
                 mainData.id.push(id);
+                mainData.schoolName.push(d.SchoolName);
                 mainData.studentEnrollment.push(+d.StudentEnrollment);
                 mainData.latitude.push(+d.Latitude);
                 mainData.longtitude.push(+d.Longitude);
@@ -46,6 +48,7 @@ function loadData() {
                 mainData.avgScoreTotal.push(+d.Total);
                 groupbyBorough[borough].borough.push(borough);
                 groupbyBorough[borough].id.push(id);
+                groupbyBorough[borough].schoolName.push(d.SchoolName);
                 groupbyBorough[borough].studentEnrollment.push(+d.StudentEnrollment);
                 groupbyBorough[borough].latitude.push(+d.Latitude);
                 groupbyBorough[borough].longtitude.push(+d.Longitude);

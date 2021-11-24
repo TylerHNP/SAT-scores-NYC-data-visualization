@@ -19,8 +19,21 @@ export function renderPie(selection) {
     var boroughs = selection.boroughs;
     var selectedRanges = selection.selectedRanges;
 
+    var selectedSchools = selection.schools;
+
     for (var borough of boroughs) {
-        dataIn.push(...(groupbyBorough[borough][selection.attribute]));
+        var data = groupbyBorough[borough][selection.attribute];
+        if (selectedSchools.length !== 0) {
+            var ids = groupbyBorough[borough]['id'];
+            var newData = [];
+            for (let i = 0; i < ids.length; i++) {
+                if (selectedSchools.includes(ids[i])) {
+                    newData.push(data[i]);
+                }
+            }
+            data = newData;
+        }
+        dataIn.push(...data);
     }
 
     var buckets = new Array(3).fill(0);
