@@ -117,7 +117,7 @@ export function renderHorizontalBarChart(selection) {
             return x(d[1]) + 5 + margin.l;
         })
         .text(function (d) {
-            return d[1];
+            return d[1] !== 0 ? d[1] : '';
         })
         .style('fill', 'white');
 
