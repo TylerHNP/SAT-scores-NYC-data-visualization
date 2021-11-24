@@ -12,33 +12,52 @@ body {
   color: white;
 }
 
-#pie-div {
-  position: absolute;
-  top: 0vh;
-  left: 45vw;
-  width: 30%;
-  height: 70%;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
 #map-div {
   position: absolute;
-  top: 5vh;
-  left: 0vw;
-  width: 45%;
+  z-index: 4;
+  top: 10vh;
+  right: 0vw;
+  width: 40%;
   height: 90%;
 }
 
 #horizontal-bar-chart-div {
   /* background-color: #aaa; */
   position: absolute;
-  bottom: 40vh;
-  right: 0vw;
-  width: 20%;
-  height: 50%;
+  bottom: 60vh;
+  left: 2.5vw;
+  width: 25%;
+  height: 30%;
   display: inline;
+}
+
+#horizontal-bar-chart-div path {
+  stroke: transparent;
+}
+
+#pie-div {
+  position: absolute;
+  top: 12vh;
+  left: 27.5vw;
+  width: 30%;
+  height: 20%;
+}
+
+#legend-div {
+  /* background-color: #aaa; */
+  position: absolute;
+  top: 15vh;
+  left: 60vw;
+  width: 15%;
+}
+
+#legend-div * {
+  cursor: crosshair;
+  user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
 }
 
 .extent {
@@ -49,14 +68,10 @@ body {
   background-color: white;
 }
 
-rect {
-  background-color: white;
-}
-
 #pie-attr {
   position: absolute;
   background-color: #161613;
-  right: 2em;
+  right: 1em;
   top: 0;
   margin-top: 2vw;
   padding: 0.5em;
@@ -68,9 +83,9 @@ rect {
 #parallel-coordinate-div {
   position: absolute;
   bottom: 0vh;
-  right: 0vw;
-  width: 55%;
-  height: 30%;
+  left: 0vw;
+  width: 60%;
+  height: 60%;
 }
 
 #title-container {
@@ -79,7 +94,7 @@ rect {
   text-align: center;
 }
 
-h3 {
+h2 {
   height: 20pt;
   padding-top: 10pt;
 }
@@ -95,4 +110,26 @@ p {
 
 svg {
   cursor: default;
+}
+
+.domain {
+  fill: none;
+  stroke: white;
+  opacity: 0.4;
+}
+
+#parallel-coordinate-div .tick line {
+  stroke: white;
+  opacity: 0.4;
+}
+
+#parallel-coordinate-div .tick text {
+  font-size: smaller;
+}
+
+.tooltip {
+  z-index: 3;
+  position: absolute;
+  color: black;
+  width: 50;
 }

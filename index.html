@@ -22,30 +22,35 @@
 </head>
 
 <body>
-    <div id='map-div'>
+    <div id='main-container'>
+        <div id='map-div'>
+        </div>
+        <div id='title-container'>
+            <h2>CSE 332 Project 4</h2>
+            <p>SAT scores of Highshool in New York</p>
+            <select id="pie-attr" onchange="runAttr()">
+                <option value="avgScoreTotal">Average total SAT score</option>
+                <option value="avgScoreMath">Average score of SAT Math</option>
+                <option value="avgScoreReading">Average score of SAT reading</option>
+                <option value="avgScoreWriting">Average score of SAT writing</option>
+                <option value="studentEnrollment">Student Enrollment</option>
+                <option value="percentWhite">Percentage of white students</option>
+                <option value="percentBlack">Percentage of black students</option>
+                <option value="percentHispanic">Percentage of hispanic students</option>
+                <option value="percentAsian">Percentage of asian students</option>
+                <option value="percentTested">Percentage of tested students</option>
+            </select>
+        </div>
+        <div id='pie-div'>
+        </div>
+        <div id='legend-div'>
+        </div>
+        <div id='horizontal-bar-chart-div'>
+        </div>
+        <div id='parallel-coordinate-div'>
+        </div>
     </div>
-    <div id='title-container'>
-        <h3>CSE 332 Project 4</h3>
-        <p>SAT scores of Highshool in New York</p>
-        <select id="pie-attr" onchange="runAttr()">
-            <option value="avgScoreTotal">Average total SAT score</option>
-            <option value="avgScoreMath">Average score of SAT Math</option>
-            <option value="avgScoreReading">Average score of SAT reading</option>
-            <option value="avgScoreWriting">Average score of SAT writing</option>
-            <option value="studentEnrollment">Student Enrollment</option>
-            <option value="percentWhite">Percentage of white students</option>
-            <option value="percentBlack">Percentage of black students</option>
-            <option value="percentHispanic">Percentage of hispanic students</option>
-            <option value="percentAsian">Percentage of asian students</option>
-            <option value="percentTested">Percentage of tested students</option>
-        </select>
-    </div>
-    <div id='pie-div'>
-    </div>
-    <div id='horizontal-bar-chart-div'>
-    </div>
-    <div id='parallel-coordinate-div'>
-    </div>
+
 
     <script src="./script.js" type='module'></script>
 

@@ -1,4 +1,5 @@
-import { colors, mainData, groupbyBorough } from './defined.js';
+import { colors, groupbyBorough } from './defined.js';
+import { update, reset } from './script.js'
 
 var vw = window.innerWidth;
 var vh = window.innerHeight;
@@ -16,15 +17,32 @@ export function renderHorizontalBarChart(selection) {
         'Staten Island': 0,
     };
 
+    var rangesIn = selection.ranges;
+
+    var ranges = [];
+    for (var rangeIndex of selectedRanges) {
+        ranges.push(rangesIn[rangeIndex]);
+    }
+
+    var selectedBoroughs = selection.boroughs;
+
     for (var key of Object.keys(counts)) {
-        var count = (groupbyBorough[key][attribute]).length;
+        var count = (groupbyBorough[key][attribute]).filter(
+            function (dp) {
+                for (var range of ranges) {
+                    if (dp >= range[0] && dp < range[1]) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        ).length;
         counts[key] = count;
     }
 
-
-    var margin = { r: 0.03 * vw, l: 0.07 * vw, t: 0.014 * vw, b: 0.03 * vw };
-    var width = 0.2 * vw - margin.r - margin.l;
-    var height = 0.5 * vh - margin.t - margin.b;
+    var margin = { r: 0.03 * vw, l: 0.07 * vw, t: 0.014 * vw, b: 0.001 * vh };
+    var width = 0.25 * vw - margin.r - margin.l;
+    var height = 0.3 * vh - margin.t - margin.b;
 
     var x = d3.scale.linear().range([0, width]).domain([0, d3.max(Object.values(counts))]);
     var y = d3.scale.ordinal().rangeRoundBands([0, height], 0.3)
@@ -45,18 +63,25 @@ export function renderHorizontalBarChart(selection) {
         .attr("class", "bar")
 
     bars.append("rect")
-        .attr("x", function (d) { return 0; })
-        .attr("width", function (d) { return x(d[1]); })
-        .attr("fill", function (d) {
-            // return colors[d[0]][1];
-            // return colors['all'][0];
-            return "#bbdefb";
-        })
-        .transition()
-        .duration(500)
         .attr("y", function (d) { return y(d[0]); })
         .attr("height", function (d) { return y.rangeBand(); })
-        .attr("transform", "translate(" + margin.l + ", 0)");
+        .on('mousedown', mousedown)
+
+
+        .attr("transform", "translate(" + margin.l + ", 0)")
+        .attr("width", function (d) { return x(d[1]); })
+        .attr("x", function (d) { return 0; })
+        .style("fill", function (d) {
+            if (selectedBoroughs.includes(d[0])) {
+                if (selectedRanges.length === 1) {
+                    return colors['all'][selectedRanges[0]];
+                }
+                return "#c2c2cb";
+            }
+            return '#444444';
+
+        })
+
 
     svg.append("g").attr("class", "y axis")
         .attr("transform", "translate(" + 3 + ", 0)")
@@ -66,6 +91,8 @@ export function renderHorizontalBarChart(selection) {
 
     svg.selectAll("text").style('fill', 'white').style('text-anchor', 'start');
     svg.selectAll("line").style('fill', 'white');
+
+    bars.data(data_ready).enter();
 
     bars.append("text")
         .attr("class", "label")
@@ -82,4 +109,16 @@ export function renderHorizontalBarChart(selection) {
         })
         .style('fill', 'white');
 
-}
+
+    function mousedown(d) {
+        if (selectedBoroughs.includes(d[0])) {
+            selectedBoroughs = selectedBoroughs.filter((e) => e !== d[0]);
+            selection.boroughs = selectedBoroughs;
+        }
+        else {
+            selection.boroughs.push(d[0]);
+        }
+        console.log(selection);
+        update(selection);
+    }
+};

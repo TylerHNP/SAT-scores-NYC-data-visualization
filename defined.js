@@ -1,6 +1,6 @@
 export var mainData = {
     borough: [],
-    zipCode: [],
+    id: [],
     latitude: [],
     longtitude: [],
     studentEnrollment: [],
@@ -17,14 +17,17 @@ export var mainData = {
 
 export var mainMapData = {
     borough: [],
-    schools: [],
+}
+
+export var combinedData = {
+    main: [],
 }
 
 
 
 var dataBrooklyn = {
     borough: [],
-    zipCode: [],
+    id: [],
     latitude: [],
     longtitude: [],
     studentEnrollment: [],
@@ -41,7 +44,7 @@ var dataBrooklyn = {
 
 var dataBronx = {
     borough: [],
-    zipCode: [],
+    id: [],
     latitude: [],
     longtitude: [],
     studentEnrollment: [],
@@ -58,7 +61,7 @@ var dataBronx = {
 
 var dataManhattan = {
     borough: [],
-    zipCode: [],
+    id: [],
     latitude: [],
     longtitude: [],
     studentEnrollment: [],
@@ -75,7 +78,7 @@ var dataManhattan = {
 
 var dataQueens = {
     borough: [],
-    zipCode: [],
+    id: [],
     latitude: [],
     longtitude: [],
     studentEnrollment: [],
@@ -92,7 +95,7 @@ var dataQueens = {
 
 var dataStatenIsland = {
     borough: [],
-    zipCode: [],
+    id: [],
     latitude: [],
     longtitude: [],
     studentEnrollment: [],
@@ -143,7 +146,7 @@ export var colors = {
         "#1e88e5",
         // "#1976d2",
         // "#1565c0", 
-        "#0d47a1"],
+        "#0d47a1"].reverse(),
     // 'all': [
     //     '#004274',
     //     '#39A0ED',

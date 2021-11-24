@@ -1,4 +1,4 @@
-import { mainData, groupbyBorough, mainMapData } from './defined.js';
+import { mainData, groupbyBorough, mainMapData, combinedData } from './defined.js';
 import { renderPie } from './pieChart.js';
 import { calculateRanges } from './quantile.js';
 import { renderHorizontalBarChart } from './horizontalbarChart.js';
@@ -11,11 +11,27 @@ var barChart;
 
 function loadData() {
     return new Promise((resolve, reject) => {
+        var id = 0;
         d3.csv("data-new.csv", function (data) {
             data.map(function (d) {
                 var borough = d.Borough;
+                var toAdd = {
+                    id: id,
+                    avgScoreWriting: +d.Writing,
+                    avgScoreReading: +d.Reading,
+                    avgScoreMath: +d.Math,
+                    avgScoreTotal: +d.Total,
+                    studentEnrollment: +d.StudentEnrollment,
+                    borough: borough,
+                    percentWhite: (parseFloat(d.PercentWhite)),
+                    percentBlack: (parseFloat(d.PercentBlack)),
+                    percentHispanic: (parseFloat(d.PercentHispanic)),
+                    percentAsian: (parseFloat(d.PercentAsian)),
+                    percentTested: (parseFloat(d.PercentTested)),
+                };
+                combinedData.main.push(toAdd);
                 mainData.borough.push(borough);
-                mainData.zipCode.push(+d.ZipCode);
+                mainData.id.push(id);
                 mainData.studentEnrollment.push(+d.StudentEnrollment);
                 mainData.latitude.push(+d.Latitude);
                 mainData.longtitude.push(+d.Longitude);
@@ -29,7 +45,7 @@ function loadData() {
                 mainData.avgScoreWriting.push(+d.Writing);
                 mainData.avgScoreTotal.push(+d.Total);
                 groupbyBorough[borough].borough.push(borough);
-                groupbyBorough[borough].zipCode.push(+d.ZipCode);
+                groupbyBorough[borough].id.push(id);
                 groupbyBorough[borough].studentEnrollment.push(+d.StudentEnrollment);
                 groupbyBorough[borough].latitude.push(+d.Latitude);
                 groupbyBorough[borough].longtitude.push(+d.Longitude);
@@ -42,6 +58,7 @@ function loadData() {
                 groupbyBorough[borough].avgScoreReading.push(+d.Reading);
                 groupbyBorough[borough].avgScoreWriting.push(+d.Writing);
                 groupbyBorough[borough].avgScoreTotal.push(+d.Total);
+                id++;
             });
 
         });
@@ -51,43 +68,49 @@ function loadData() {
             resolve();
         });
 
-
-
-
-
     })
 
 }
 
 window.onload = function () {
+
+    loadData().then(reset);
+
+}
+window.runAttr = function () {
+    var newAttribute = document.getElementById('pie-attr').value;
+    console.log("attribute is changed to" + newAttribute);
+    selectionState.attribute = newAttribute;
+    selectionState.ranges = calculateRanges(mainData[selectionState.attribute]);
+    renderPie(selectionState);
+    renderMap(selectionState);
+    renderHorizontalBarChart(selectionState);
+    renderParallelCoordinates(selectionState);
+}
+
+export function reset() {
     selectionState = {
-        boroughs: [],
+        boroughs: [
+            'Brooklyn',
+            'Bronx',
+            'Manhattan',
+            'Queens',
+            'Staten Island'],
         schools: [],
         ranges: [],
         attribute: 'avgScoreTotal',
-        selectedRanges: [true, true, true]
+        selectedRanges: [],
     }
-    loadData().then(
-        function () {
-            selectionState.ranges = calculateRanges(mainData[selectionState.attribute]);
-            renderPie(selectionState);
-            renderMap(selectionState);
-            renderHorizontalBarChart(selectionState);
-            // renderParallelCoordinates(mainData, 'all', pieChart.ranges);
-        }
-    )
+    selectionState.ranges = calculateRanges(mainData[selectionState.attribute]);
+    selectionState.selectedRanges = [0, 1, 2];
+    update(selectionState);
 };
 
-
-window.runAttr = function () {
-    var key = document.getElementById('pie-attr').value;
-    console.log("the key is changed to" + key);
-    var pieChart = renderPie(mainData[key], key, 'all');
-    selectionState.ranges = pieChart.ranges;
-    selectionState.attribute = key;
-    renderMap(selectionState);
-    // var barChart = renderBarChart(mainData[key], mainData.borough, 'all', pieChart.ranges);
-    // barChart.update(mainData[key], mainData.borough, 'all', pieChart.ranges);
+export function update(selection) {
+    renderPie(selection);
+    renderMap(selection);
+    renderHorizontalBarChart(selection);
+    renderParallelCoordinates(selection);
 }
 
 
