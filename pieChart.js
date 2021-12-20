@@ -15,9 +15,12 @@ export function renderPie(selection) {
     var innerRadius = Math.min(width, height) / 3.2 - margin;
     var counts = []
     var ranges = selection.ranges;
+
     var dataIn = [];
     var boroughs = selection.boroughs;
     var selectedRanges = selection.selectedRanges;
+    console.log('pie chart');
+    console.log(selectedRanges);
 
     var selectedSchools = selection.schools;
 
@@ -155,7 +158,7 @@ export function renderPie(selection) {
         }
         else {
             selectedRanges.push(d.data.index);
-            selection.selectedRanges = [...selectedRanges];
+            selection.selectedRanges = selectedRanges;
             update(selection);
         }
 

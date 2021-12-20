@@ -44,7 +44,7 @@ export function renderParallelCoordinates(selection) {
                 var dp = d[selection.attribute];
                 for (var i = 0; i < ranges.length; i++) {
                     if (dp >= ranges[i][0] && dp < ranges[i][1]) {
-                        return colors['all'][i];
+                        return colors['all'][selection.ranges.indexOf(ranges[i])];
                     }
                 }
                 return '#2C2C2B';

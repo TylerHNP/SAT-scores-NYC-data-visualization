@@ -8,7 +8,11 @@ export function renderMap(selection) {
     d3.select('#map-div').selectAll("*").remove();
     var width = 0.4 * vw;
     var height = 0.9 * vh;
-    var ranges = selection.selectedRanges.map((index) => (selection.ranges[index]));
+    var ranges = [];
+    for (var range of selection.selectedRanges) {
+        ranges.push(selection.ranges[range]);
+    }
+    console.log(ranges);
     var latitude = mainData.latitude;
     var longtitude = mainData.longtitude;
     var boroughs = mainData.borough;
@@ -62,8 +66,6 @@ export function renderMap(selection) {
         });
 
 
-
-
     svg.selectAll('.circle')
         .data(points)
         .enter()
@@ -75,7 +77,7 @@ export function renderMap(selection) {
             function (d) {
                 for (let j = 0; j < ranges.length; j++) {
                     if (d[3] >= ranges[j][0] && d[3] < ranges[j][1]) {
-                        return colors['all'][j];
+                        return colors['all'][selection.ranges.indexOf(ranges[j])];
                     }
                 }
                 return 'none';
@@ -125,10 +127,5 @@ export function renderMap(selection) {
         }
 
     }
-
-
-
-
-
 
 }
