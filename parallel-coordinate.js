@@ -55,13 +55,13 @@ export function renderParallelCoordinates(selection) {
 
         })
         .style("opacity", function (d) {
-            if (selectedBoroughs.includes(d.borough)) {
+            if (selectedBoroughs.includes(d.borough) || selectedSchools.includes(d.id)) {
                 return 0.5;
             }
-            return 0.3;
+            return 0.1;
         })
         .style("z-index", function (d) {
-            if (selectedBoroughs.includes(d.borough)) {
+            if (selectedBoroughs.includes(d.borough) || selectedSchools.includes(d.id)) {
                 return 3;
             }
             return 1;

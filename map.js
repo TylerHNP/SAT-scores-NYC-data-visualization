@@ -10,6 +10,7 @@ const boroughList = ['Brooklyn',
     'Staten Island'];
 
 export function renderMap(selection) {
+    console.log('map');
     d3.select('#map-div').selectAll("*").remove();
     var width = 0.4 * vw;
     var height = 0.9 * vh;
@@ -86,6 +87,17 @@ export function renderMap(selection) {
         .style("padding", "5px")
         .style("position", 'absolute')
         .style("top", 0);
+
+    d3.select("#map-div")
+        .append("div")
+        .style("opacity", 1)
+        .attr("class", "instruction")
+        .style("color", 'white')
+        .style("padding", "20px")
+        .style("position", 'absolute')
+        .style("bottom", 0)
+        .style("right", 0)
+        .html("<p> * Hold down on a dot for isolated detail view</p>");
     svg.call(brush);
 
     svg.selectAll('.circle')
@@ -118,9 +130,9 @@ export function renderMap(selection) {
         .style("cursor", 'pointer')
         .on("mouseover", mouseover)
         .on("mouseout", mouseout)
-        .on("mousedown", mousedown);
-
-
+        .on("mousedown", mousedown)
+        .on("mouseup", mouseup);
+    ;
 
     function brushed(extent) {
         var selectedSchools = [];
@@ -146,15 +158,18 @@ export function renderMap(selection) {
 
             });
         if (selectedSchools.length < mainData['id'].length && selectedSchools.length > 0) {
+            console.log('else if');
             selection.schools = selectedSchools;
             selection.boroughs = [...newBoroughs];
             update(selection);
         }
         else {
+            console.log('else');
             // console.log('reset to all');
             selection.schools = [];
             selection.boroughs = [...boroughList];
             console.log(selection.boroughs);
+            console.log(selection);
             update(selection);
         }
 
@@ -163,12 +178,12 @@ export function renderMap(selection) {
     function mouseover(d) {
         tooltip
             .html(d[5] + '<br/> Borough - ' + d[2])
-            .style("left", (d3.mouse(this)[0]) - 50 + "px")
-            .style("top", (d3.mouse(this)[1]) - 80 + "px");
+            .style("right", (width - d3.mouse(this)[0] + 50) + "px")
+            .style("top", (d3.mouse(this)[1]) - 50 + "px");
         tooltip
             .style("opacity", 1)
-        console.log("mouse over");
-        console.log(d[5]);
+        // console.log("mouse over");
+        // console.log(d[5]);
     }
     function mouseout(d) {
         tooltip
@@ -176,17 +191,13 @@ export function renderMap(selection) {
         tooltip.style("top", 0)
     }
     function mousedown(d) {
-        // console.log(d.data.index);
-        // if (selectedRanges.includes(d.data.index)) {
-        //     var newRanges = selectedRanges.filter((e) => e !== d.data.index);
-        //     selection.selectedRanges = [...newRanges];
-        //     update(selection);
-        // }
-        // else {
-        //     selectedRanges.push(d.data.index);
-        //     selection.selectedRanges = selectedRanges;
-        //     update(selection);
-        // }
+        console.log('mouse down');
+        selection.schools = [d[4]];
+        selection.boroughs = [d[2]];
+        console.log(selection);
+        update(selection);
+    }
+    function mouseup(d) {
 
     }
 

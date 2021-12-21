@@ -74,9 +74,7 @@ function loadData() {
 }
 
 window.onload = function () {
-
     loadData().then(reset);
-
 }
 window.runAttr = function () {
     var newAttribute = document.getElementById('pie-attr').value;
@@ -108,10 +106,14 @@ export function reset() {
 };
 
 export function update(selection) {
+    console.log('updating');
+    console.log(selection);
     renderPie(selection);
     renderMap(selection);
     renderHorizontalBarChart(selection);
     renderParallelCoordinates(selection);
 }
+
+
 
 
