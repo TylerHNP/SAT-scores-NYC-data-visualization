@@ -128,8 +128,9 @@ svg {
 }
 
 .tooltip {
-  z-index: 3;
+  z-index: 20;
   position: absolute;
   color: black;
   width: 50;
+  cursor: default;
 }

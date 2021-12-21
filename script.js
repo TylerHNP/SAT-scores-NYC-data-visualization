@@ -6,8 +6,6 @@ import { renderParallelCoordinates } from './parallel-coordinate.js';
 import { renderMap } from './map.js'
 
 var selectionState;
-var pieChart;
-var barChart;
 
 function loadData() {
     return new Promise((resolve, reject) => {

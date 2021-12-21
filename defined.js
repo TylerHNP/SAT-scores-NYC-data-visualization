@@ -144,9 +144,9 @@ export var labels = new Map([
 export var colors = {
     'all': [
         // "#e3f2fd",
-        // "#bbdefb", 
-        // "#90caf9",
-        "#64b5f6",
+        // "#bbdefb",
+        "#90caf9",
+        // "#64b5f6",
         //  "#42a5f5", 
         // "#2196f3",
         "#1e88e5",

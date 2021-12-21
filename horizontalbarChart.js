@@ -78,6 +78,7 @@ export function renderHorizontalBarChart(selection) {
         .attr("y", function (d) { return y(d[0]); })
         .attr("height", function (d) { return y.rangeBand(); })
         .on('mousedown', mousedown)
+        .style("cursor", 'pointer')
 
 
         .attr("transform", "translate(" + margin.l + ", 0)")

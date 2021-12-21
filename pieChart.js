@@ -19,8 +19,8 @@ export function renderPie(selection) {
     var dataIn = [];
     var boroughs = selection.boroughs;
     var selectedRanges = selection.selectedRanges;
-    console.log('pie chart');
-    console.log(selectedRanges);
+    // console.log('pie chart');
+    // console.log(selectedRanges);
 
     var selectedSchools = selection.schools;
 
@@ -124,9 +124,8 @@ export function renderPie(selection) {
 
         })
         .style("stroke", '#161613')
-        .style("stroke-width", "4px");
-
-    svg.selectAll('path')
+        .style("stroke-width", "4px")
+        .style("cursor", 'pointer')
         .on("mouseover", mouseover)
         .on("mousemove", mousemove)
         .on("mouseout", mouseout)
@@ -145,7 +144,6 @@ export function renderPie(selection) {
             .style("position", 'absolute')
     }
     function mouseout(d) {
-
         tooltip
             .style("opacity", 0)
     }
