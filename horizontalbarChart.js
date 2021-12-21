@@ -53,7 +53,7 @@ export function renderHorizontalBarChart(selection) {
     }
 
     var margin = { r: 0.03 * vw, l: 0.07 * vw, t: 0.014 * vw, b: 0.001 * vh };
-    var width = 0.25 * vw - margin.r - margin.l;
+    var width = 0.35 * vw - margin.r - margin.l;
     var height = 0.3 * vh - margin.t - margin.b;
 
     var x = d3.scale.linear().range([0, width]).domain([0, d3.max(Object.values(counts))]);
